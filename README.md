@@ -133,7 +133,11 @@ If you own `example.com`, your records for Kubernetes would look like
 
 1. `aws s3api create-bucket --bucket <bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>`
 
-2. Export the S3 bucket name as an environment variable:
+# 2. Set admin context - If this isn't set up, you'll have an 'unauthorized error' during validation
+
+`kops export kubecfg --admin=87600h` 
+
+3. Export the S3 bucket name as an environment variable:
 
 `export KOPS_STATE_STORE=s3://<bucket-name>`
 
@@ -202,4 +206,12 @@ Once the cluster is ready, you can use the Kubernetes CLI (kubectl) to interact 
 
 2. Click 'Stop' on your AWS instance
 
-When you come back, just restart your instance and recreate your cluster - Environment variables should still be there if you didn't terminate your instance.
+When you come back, just restart your instance and recreate your cluster 
+
+Run this command to search for env. variables:
+
+`history | grep export`
+
+And run the command with a `!` before its number:
+
+`!command number`
