@@ -61,7 +61,7 @@ To test, run:
 
 `kops`
 
-### Install kops
+### Install kubectl
 
 1. Download the latest release with the command:
 
@@ -75,11 +75,10 @@ To test, run:
 
 `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check`
 
-### Install kubectl
 
-1. `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
+- `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
 
-2. Test to ensure the version you installed is up-to-date:
+- Test to ensure the version you installed is up-to-date:
 
 `kubectl version --client`
 
