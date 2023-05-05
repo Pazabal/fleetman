@@ -1,7 +1,8 @@
-# Fleetman DevOps Project
-This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with four nodes. The nodes include:
+# Fleetman Project
 
-## Features
+This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with four nodes. 
+
+## The nodes include:
 
 - Position Simulator: A service that simulates the positions of vehicles in a fleet. It generates random GPS coordinates and sends them to the Position Tracker service.
 
@@ -55,12 +56,15 @@ Example:
 `chmod +x kops`
 
 `sudo mv kops /usr/local/bin/kops`
+
 To test, run:
+
 `kops`
 
 ### Install kubectl
 
 1. Download the latest release with the command:
+
 `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
 
 2. Download the kubectl checksum file:
@@ -68,6 +72,7 @@ To test, run:
 `curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"`
 
 3. Validate the kubectl binary against the checksum file:
+
 `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check`
 
 ### Install kubectl
@@ -75,6 +80,7 @@ To test, run:
 1. `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
 
 2. Test to ensure the version you installed is up-to-date:
+
 `kubectl version --client`
 
 ### Create the kops IAM user from the command line using the following:
@@ -114,9 +120,12 @@ To test, run:
 
 - If you bought your domain with AWS, then you should already have a hosted zone in Route53. 
 
-- In this example you own `example.com` and your records for Kubernetes would look like `etcd-us-east-1c.internal.clustername.example.com`
+- In this example you own `example.com` and your records for Kubernetes would look like 
+
+`etcd-us-east-1c.internal.clustername.example.com`
 
 - To test you DNS:
+
 `dig ns subdomain.example.com`
 
 ### Create an S3 bucket to store the cluster configuration:
@@ -132,9 +141,11 @@ To test, run:
 ### Create the Kubernetes cluster:
 
 1. Check availability zones:
+
 `aws ec2 describe-availability-zones --region us-west-2`
 
 2. Create the cluster:
+
 `kops create cluster --name ${NAME} --state ${KOPS_STATE_STORE} --node-count 2 --node-size t2.medium --zones <zone-1>,<zone-2>,<zone-3> --ssh-public-key <path-to-public-key>`
 
 3. Edit the cluster configuration to add the Position Simulator, MongoDB, Position Tracker, and Queue nodes:
@@ -171,6 +182,7 @@ Once the cluster is ready, you can use the Kubernetes CLI (kubectl) to interact 
 ## Wanna go for a walk? 
 
 1. Run:
+
 `kops delete cluster --name ${NAME}`
 
 2. Click 'Stop' on your AWS instance
