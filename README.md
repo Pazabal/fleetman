@@ -108,7 +108,8 @@ To test, run:
 12. `aws iam create-access-key --user-name kops`
 
 13. To test, run:
-`aws iam list-users`# you should see a list of all your IAM users here
+
+`aws iam list-users` 
 
 14. Because "aws configure" doesn't export these vars for kops to use, we export them now
 
@@ -120,11 +121,11 @@ To test, run:
 
 - If you bought your domain with AWS, then you should already have a hosted zone in Route53. 
 
-- In this example you own `example.com` and your records for Kubernetes would look like 
+If you own `example.com`, your records for Kubernetes would look like 
 
 `etcd-us-east-1c.internal.clustername.example.com`
 
-- To test you DNS:
+- To test your DNS:
 
 `dig ns subdomain.example.com`
 
@@ -135,7 +136,9 @@ To test, run:
 2. Export the S3 bucket name as an environment variable:
 
 `export KOPS_STATE_STORE=s3://<bucket-name>`
+
 `NAME=prefix.fleetman.com`
+
 `kops export kubeconfig ${NAME} --admin`
 
 ### Create the Kubernetes cluster:
@@ -152,12 +155,24 @@ To test, run:
 
 `kops edit ig nodes --name ${NAME}`
 
-4. Add the following YAML files to the current working directory:
+4. Create the following YAML files in the current working directory:
 
-- storage-aws.yaml
-- mongo-stack.yaml
-- workloads.yaml
-- services.yaml
+`nano storage-aws.yaml`
+
+Add storage-aws.yaml content
+
+`mongo-stack.yaml`
+
+Add mongo-stack.yaml content
+
+`workloads.yaml`
+
+Add workloads.yaml content
+
+`services.yaml`
+
+Add services.yaml content
+
 
 5. Then run:
 
