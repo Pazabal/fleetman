@@ -28,11 +28,11 @@ You'll also need an AWS account with the following permissions:
 - IAM
 - S3
 
-### Getting Started
+## Getting Started
 
 To create the Kubernetes cluster, follow these steps:
 
-## Set up the environment:
+### Set up the environment:
 
 - If your local machine is running on windows or mac, create a Linux EC2 t2.medium instance on AWS (I recommend Cygwin as a CLI for Windows)
 
@@ -48,7 +48,7 @@ Example:
 
 - Run `aws configure` to be able to create users and groups (using a key pair from your user)
 
-## Install kops
+### Install kops
 
 `curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64`
 
@@ -58,7 +58,7 @@ Example:
 To test, run:
 `kops`
 
-## Install kubectl
+### Install kubectl
 
 1. Download the latest release with the command:
 `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
@@ -70,14 +70,14 @@ To test, run:
 3. Validate the kubectl binary against the checksum file:
 `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check`
 
-## Install kubectl
+### Install kubectl
 
 1. `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
 
 2. Test to ensure the version you installed is up-to-date:
 `kubectl version --client`
 
-## Create the kops IAM user from the command line using the following:
+### Create the kops IAM user from the command line using the following:
 
 1. `aws iam create-group --group-name kops`
 
@@ -110,7 +110,7 @@ To test, run:
 
 - `export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)`
 
-## DNS:
+### DNS:
 
 - If you bought your domain with AWS, then you should already have a hosted zone in Route53. 
 
@@ -119,7 +119,7 @@ To test, run:
 - To test you DNS:
 `dig ns subdomain.example.com`
 
-## Create an S3 bucket to store the cluster configuration:
+### Create an S3 bucket to store the cluster configuration:
 
 1. `aws s3api create-bucket --bucket <bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>`
 
@@ -129,7 +129,7 @@ To test, run:
 `NAME=prefix.fleetman.com`
 `kops export kubeconfig ${NAME} --admin`
 
-## Create the Kubernetes cluster:
+### Create the Kubernetes cluster:
 
 1. Check availability zones:
 `aws ec2 describe-availability-zones --region us-west-2`
@@ -160,7 +160,7 @@ To test, run:
 
 `kops validate cluster --name ${NAME} --state ${KOPS_STATE_STORE}`
 
-### Usage
+## Usage
 
 Once the cluster is ready, you can use the Kubernetes CLI (kubectl) to interact with the nodes:
 
@@ -168,7 +168,7 @@ Once the cluster is ready, you can use the Kubernetes CLI (kubectl) to interact 
 
 `kubectl -n kube-system get po`
 
-### Wanna go for a walk? 
+## Wanna go for a walk? 
 
 1. Run:
 `kops delete cluster --name ${NAME}`
