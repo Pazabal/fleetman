@@ -61,7 +61,7 @@ To test, run:
 
 `kops`
 
-### Install kubectl
+### Install kops
 
 1. Download the latest release with the command:
 
@@ -135,15 +135,13 @@ If you own `example.com`, your records for Kubernetes would look like
 
 # 2. Set admin context - If this isn't set up, you'll have an 'unauthorized error' during validation
 
-`kops export kubecfg --admin=87600h` 
+`kops export kubecfg ${NAME} --admin=87600h` 
 
 3. Export the S3 bucket name as an environment variable:
 
 `export KOPS_STATE_STORE=s3://<bucket-name>`
 
 `NAME=prefix.fleetman.com`
-
-`kops export kubeconfig ${NAME} --admin`
 
 ### Create the Kubernetes cluster:
 
@@ -215,3 +213,4 @@ Run this command to search for env. variables:
 And run the command with a `!` before its number:
 
 `!command number`
+
