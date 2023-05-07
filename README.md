@@ -1,8 +1,8 @@
 # Fleetman Project
 
-This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with four nodes. 
+This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with 6 pods. 
 
-## The nodes include:
+## The pods include:
 
 - Position Simulator: A service that simulates the positions of vehicles in a fleet. It generates random GPS coordinates and sends them to the Position Tracker service.
 
@@ -132,25 +132,25 @@ If you own `example.com`, your records for Kubernetes would look like
 
 1. `aws s3api create-bucket --bucket <bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>`
 
-# 2. Set admin context - If this isn't set up, you'll have an 'unauthorized error' during validation
-
-`kops export kubecfg ${NAME} --admin=87600h` 
-
-3. Export the S3 bucket name as an environment variable:
-
-`export KOPS_STATE_STORE=s3://<bucket-name>`
-
-`NAME=prefix.fleetman.com`
-
 ### Create the Kubernetes cluster:
 
 1. Check availability zones:
 
 `aws ec2 describe-availability-zones --region us-west-2`
 
-2. Create the cluster:
+2. Export the S3 bucket name as an environment variable:
 
-`kops create cluster --name ${NAME} --state ${KOPS_STATE_STORE} --node-count 2 --node-size t2.medium --zones <zone-1>,<zone-2>,<zone-3> --ssh-public-key <path-to-public-key>`
+`export KOPS_STATE_STORE=s3://<bucket-name>`
+
+`NAME=prefix.fleetman.com`
+
+3. Create the cluster:
+
+`kops create cluster  --name ${NAME} --cloud aws --zones us-west-2a,us-west-2b,us-west-2c>`
+
+# Set admin context - If this isn't set up, you'll have an `unauthorized error` during validation
+
+`kops export kubecfg ${NAME} --admin=87600h` 
 
 3. Edit the cluster configuration to add the Position Simulator, MongoDB, Position Tracker, and Queue nodes:
 
@@ -173,7 +173,6 @@ Add workloads.yaml content
 `services.yaml`
 
 Add services.yaml content
-
 
 5. Then run:
 
@@ -203,7 +202,7 @@ Once the cluster is ready, you can use the Kubernetes CLI (kubectl) to interact 
 
 2. Click 'Stop' on your AWS instance
 
-When you come back, just restart your instance and recreate your cluster 
+When you come back, restart your instance and recreate your cluster
 
 Run this command to search for env. variables:
 
