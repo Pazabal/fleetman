@@ -18,9 +18,12 @@ This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium ins
 
 To run this project, you'll need the following tools:
 
-- kops
+- kops 
+`https://github.com/kubernetes/kops/blob/master/docs/install.md` 
 - kubectl
+`https://github.com/kubernetes/kops/blob/master/docs/install.md` Search for "other dependencies"
 - AWS CLI
+`https://github.com/kubernetes/kops/blob/master/docs/getting_started/aws.md`
 
 You'll also need an AWS account with the following permissions:
 
@@ -84,31 +87,31 @@ To test, run:
 
 ### Create the kops IAM user from the command line using the following:
 
-1. `aws iam create-group --group-name kops`
+- `aws iam create-group --group-name kops`
 
-2. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops`
 
-3. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops`
 
-4. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name kops`
 
-5. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops`
 
-6. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops`
 
-7. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess --group-name kops`
 
-8. `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess --group-name kops`
+- `aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess --group-name kops`
 
-10. `aws iam create-user --user-name kops`
+- `aws iam create-user --user-name kops`
 
-11. `aws iam add-user-to-group --user-name kops --group-name kops`
+- `aws iam add-user-to-group --user-name kops --group-name kops`
 
-12. `aws iam create-access-key --user-name kops`
+- `aws iam create-access-key --user-name kops`
 
-13. To test, run:
+To test, run:
 
-`aws iam list-users` 
+- `aws iam list-users` 
 
 14. Because "aws configure" doesn't export these vars for kops to use, we export them now
 
