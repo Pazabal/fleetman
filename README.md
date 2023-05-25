@@ -2,6 +2,8 @@
 
 This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with 6 pods. 
 
+![alt text](https://github.com/Pazabal/tree/master/Fleetman.png?raw=true)
+
 ## The pods include:
 
 - Position Simulator: A service that simulates the positions of vehicles in a fleet. It generates random GPS coordinates and sends them to the Position Tracker service.

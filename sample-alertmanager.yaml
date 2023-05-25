@@ -1,0 +1,26 @@
+global:
+  slack_api_url: 'https://hooks.slack.com/services/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'
+receivers:
+- name: slackandPD
+  pagerduty_configs:
+  - service_key: 'u+DowhCKkyxs-EGmmySA'
+  slack_configs:
+  - channel: '#alerts'
+    icon_emoji: ':bell:'
+    send_resolved: true
+    text: "<!channel> \nsummary: {{ .CommonAnnotations.message }}\n"
+- name: DMS
+  webhook_configs:
+  - send_resolved: false
+    url: 'https://nosnch.in/ab5bbf0f8f'
+route:
+  group_by:
+  - alertname
+  group_interval: 1m
+  group_wait: 5s
+  receiver: slackandPD
+  repeat_interval: 10m
+  routes:
+  - match:
+      alertname: Watchdog
+    receiver: DMS

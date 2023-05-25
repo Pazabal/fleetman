@@ -1,0 +1,3 @@
+# kubectl delete/create secret generic --from-file=alertmanager.yaml -n monitoring alertmanager-monitoring-kube-prometheus-alertmanager
+
+curl -X POST --data-urlencode "payload={\"channel\": \"#alerts\", \"username\": \"webhookbot\", \"text\": \"This is posted to #alerts and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
