@@ -2,7 +2,7 @@
 
 This project creates a Kubernetes cluster using kops in an AWS EC2 t2.medium instance with 6 pods. 
 
-![alt text](https://github.com/Pazabal/tree/master/Fleetman.png?raw=true)
+![alt text](https://github.com/Pazabal/fleetman/blob/master/Fleetman.png?raw=true)
 
 ## The pods include:
 
